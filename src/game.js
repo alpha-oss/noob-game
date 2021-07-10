@@ -16,7 +16,7 @@ var snakePath = new Array(); //arrary of positions(points) that have to be store
 var numSnakeSections = 30; //number of snake body sections
 var snakeSpacer = 2; //parameter that sets the spacing between sections
 
-var angularSpeed = 200; //angular speed of snake.
+var angularSpeed = 120; //angular speed of snake.
 
 var moveSnakeForward = () => {
 	snakeHead.body.velocity.copyFrom(
