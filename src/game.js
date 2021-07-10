@@ -1,13 +1,20 @@
 var game = new Phaser.Game(1200, 675, Phaser.AUTO, "phaser-example", {
+<<<<<<< HEAD
   preload: preload,
   create: create,
   update: update,
   render: render,
+=======
+	preload: preload,
+	create: create,
+	update: update,
+	render: render,
+>>>>>>> 5c5c9a1dc0fa2fc05becb55e95256bcc6653c003
 });
 
 function preload() {
-  game.load.image("ball", "./assets/bullet.png");
-  game.load.image("backg", "./assets/background.png");
+	game.load.image("ball", "./assets/bullet.png");
+	game.load.image("backg", "./assets/background.png");
 }
 
 var snakeHead; //head of snake sprite
@@ -16,61 +23,71 @@ var snakePath = new Array(); //arrary of positions(points) that have to be store
 var numSnakeSections = 30; //number of snake body sections
 var snakeSpacer = 2; //parameter that sets the spacing between sections
 
+var angularSpeed = 200; //angular speed of snake.
+
+var moveSnakeForward = () => {
+	snakeHead.body.velocity.copyFrom(
+		game.physics.arcade.velocityFromAngle(snakeHead.angle, 300)
+	);
+
+	// Everytime the snake head moves, insert the new location at the start of the array,
+	// and knock the last position off the end
+
+	var part = snakePath.pop();
+
+	part.setTo(snakeHead.x, snakeHead.y);
+
+	snakePath.unshift(part);
+
+	for (var i = 1; i <= numSnakeSections - 1; i++) {
+		snakeSection[i].x = snakePath[i * snakeSpacer].x;
+		snakeSection[i].y = snakePath[i * snakeSpacer].y;
+	}
+}
+
+
 function create() {
-  game.physics.startSystem(Phaser.Physics.ARCADE);
-  game.add.sprite(0, 0, "backg");
-  game.world.setBounds(0, 0, 800, 600);
+	game.physics.startSystem(Phaser.Physics.ARCADE);
+	game.add.sprite(0, 0, "backg");
+	game.world.setBounds(0, 0, 800, 600);
 
-  cursors = game.input.keyboard.createCursorKeys();
+	cursors = game.input.keyboard.createCursorKeys();
 
-  snakeHead = game.add.sprite(400, 300, "ball");
-  snakeHead.anchor.setTo(0.5, 0.5);
+	snakeHead = game.add.sprite(400, 300, "ball");
+	snakeHead.anchor.setTo(0.5, 0.5);
 
-  game.physics.enable(snakeHead, Phaser.Physics.ARCADE);
+	game.physics.enable(snakeHead, Phaser.Physics.ARCADE);
 
-  //  Init snakeSection array
-  for (var i = 1; i <= numSnakeSections - 1; i++) {
-    snakeSection[i] = game.add.sprite(400, 300, "ball");
-    snakeSection[i].anchor.setTo(0.5, 0.5);
-  }
+	//  Init snakeSection array
+	for (var i = 1; i <= numSnakeSections - 1; i++) {
+		snakeSection[i] = game.add.sprite(400, 300, "ball");
+		snakeSection[i].anchor.setTo(0.5, 0.5);
+	}
 
-  //  Init snakePath array
-  for (var i = 0; i <= numSnakeSections * snakeSpacer; i++) {
-    snakePath[i] = new Phaser.Point(400, 300);
-  }
+	//  Init snakePath array
+	for (var i = 0; i <= numSnakeSections * snakeSpacer; i++) {
+		snakePath[i] = new Phaser.Point(400, 300);
+	}
 }
 
 function update() {
-  snakeHead.body.velocity.setTo(0, 0);
-  snakeHead.body.angularVelocity = 0;
+	snakeHead.body.velocity.setTo(0, 0);
+	snakeHead.body.angularVelocity = 0;
 
-  if (cursors.up.isDown) {
-    snakeHead.body.velocity.copyFrom(
-      game.physics.arcade.velocityFromAngle(snakeHead.angle, 300)
-    );
+	if (cursors.up.isDown) {
+		moveSnakeForward();
+	}
 
-    // Everytime the snake head moves, insert the new location at the start of the array,
-    // and knock the last position off the end
+	if (cursors.left.isDown) {
+		snakeHead.body.angularVelocity = -(angularSpeed);
+		moveSnakeForward();
 
-    var part = snakePath.pop();
-
-    part.setTo(snakeHead.x, snakeHead.y);
-
-    snakePath.unshift(part);
-
-    for (var i = 1; i <= numSnakeSections - 1; i++) {
-      snakeSection[i].x = snakePath[i * snakeSpacer].x;
-      snakeSection[i].y = snakePath[i * snakeSpacer].y;
-    }
-  }
-
-  if (cursors.left.isDown) {
-    snakeHead.body.angularVelocity = -300;
-  } else if (cursors.right.isDown) {
-    snakeHead.body.angularVelocity = 300;
-  }
+	} else if (cursors.right.isDown) {
+		snakeHead.body.angularVelocity = angularSpeed;
+		moveSnakeForward();
+	}
 }
 
 function render() {
-  game.debug.spriteInfo(snakeHead, 32, 32);
+	game.debug.spriteInfo(snakeHead, 32, 32);
 }
