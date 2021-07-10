@@ -1,7 +1,7 @@
 // Snake by Patrick OReilly and Richard Davey
 // Twitter: @pato_reilly Web: http://patricko.byethost9.com
 
-var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, "phaser-example", {
+var game = new Phaser.Game(1920, 1080, Phaser.AUTO, "phaser-example", {
   preload: preload,
   create: create,
   update: update,
