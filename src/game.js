@@ -1,7 +1,4 @@
-// Snake by Patrick OReilly and Richard Davey
-// Twitter: @pato_reilly Web: http://patricko.byethost9.com
-
-var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, "phaser-example", {
+var game = new Phaser.Game(1200, 675, Phaser.AUTO , "phaser-example", {
   preload: preload,
   create: create,
   update: update,
@@ -9,8 +6,8 @@ var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, "phaser-example", {
 });
 
 function preload() {
-  game.load.image("ball", "assets/pp.png");
-  game.load.image("backg", "assets/background.png");
+  game.load.image("ball", "./assets/bullet.png");
+  game.load.image("backg", "./assets/background.png");
 }
 
 var snakeHead; //head of snake sprite
