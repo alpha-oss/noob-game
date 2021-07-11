@@ -25,8 +25,8 @@ var snakeSpacer = 2; //parameter that sets the spacing between sections
 var angularSpeed = 200; //angular speed of snake.
 
 // CANDY BULLETS
-var fireRate = 100;
-var nextFire = 0;
+// var fireRate = 100;
+// var nextFire = 0;
 
 // MAKES SNAKE GO BRRRRRR
 var moveSnakeForward = () => {
@@ -49,6 +49,12 @@ var moveSnakeForward = () => {
 	}
 }
 
+// MAKES GHOST MOVE ON HIS OWN
+let moveGhost = () => {
+	ghost.body.moveLeft(500);
+}
+
+
 /////////////////////////////////////////////// CREATE ////////////////////////////////////////////
 
 function create() {
@@ -57,7 +63,7 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
 
-	var group = game.add.group();
+	// var group = game.add.group();
 
 	// ADD SPRITES
 	game.add.sprite(0, 0, "bg");
@@ -66,15 +72,27 @@ function create() {
 	// CREATE INPUT JEYS FOR THE GAME
 	cursors = game.input.keyboard.createCursorKeys(); // ARROW KEYS
 
-	///// CREATE SPRITES
-	// - GHOST SPRITE
+	///// CREATE LESSER BEINGS
+	// - GHOST
+	// ADD SPRITE TO GAME
 	ghost = game.add.sprite(200, 200, "ghost");
 	ghost.anchor.setTo(0.5, 0.5);
+	// ENABLE PHYSICS
+	game.physics.p2.enable(ghost);
+	// NO CLUE WHAT THIS DOES BUT IT HAS TO BE HERE (GHOST)
+	ghost.body.setZeroDamping();
+	ghost.body.fixedRotation = true;
+	// GHOST MOVEMENT
+	// var timedEvent = new Phaser.Time.TimerEvent({ delay: 500 });
+	aaa = new Timer(game);
+	console.log(aaa);
+	// timedEvent = this.time.addEvent(500, moveGhost, game, true );
+	// timedEvent = game.time.addEvent({ delay: 500, callback: moveGhost, callbackScope: this, loop: true });
 	
 	// - CANDY BULLETS
 	// candyBullets = game.add.sprite(400, 400, "candyBullet");
-	candyBullets = game.add.group();
-	candyBullets.createMultiple(50, 'bullet');
+	// candyBullets = game.add.group();
+	// candyBullets.createMultiple(50, 'bullet');
 	// candyBullet.anchor.setTo(0.5, 0.5);
 
 	// - SNAKE SPRITE
@@ -82,17 +100,11 @@ function create() {
 	snakeHead.anchor.setTo(0.5, 0.5);
 
 	///// ENABLE PHYSICS FOR SPRITES
-	// - GHOST PHYSICS
-	game.physics.p2.enable(ghost);
-	// NO CLUE WHAT THIS DOES BUT IT HAS TO BE HERE (GHOST)
-	ghost.body.setZeroDamping();
-	ghost.body.fixedRotation = true;
-
 	// - CANDY BULLET PHYSICS
-	candyBullets.enableBody = true;
-    candyBullets.physicsBodyType = Phaser.Physics.ARCADE;
-	candyBullets.setAll('checkWorldBounds', true);
-    candyBullets.setAll('outOfBoundsKill', true);
+	// candyBullets.enableBody = true;
+    // candyBullets.physicsBodyType = Phaser.Physics.ARCADE;
+	// candyBullets.setAll('checkWorldBounds', true);
+    // candyBullets.setAll('outOfBoundsKill', true);
 	
 	// - SNAKE PHYSICS
 	game.physics.enable(snakeHead, Phaser.Physics.ARCADE);
@@ -111,7 +123,6 @@ function create() {
 	// STOPS THE SNAKE FROM GOING OUT
 	snakeHead.body.collideWorldBounds = true;
 
-
 	///// ANIMATIONS
 	// - GHOST
 	ghost.animations.add('walkRight', [0,1], 5, true);
@@ -126,11 +137,22 @@ function create() {
 
 function update() {
 
+	text.setText('hai');
+
 	ghost.animations.play('walkLeft');
 	// candyBullets.animations.play('spin');
 
 	ghost.body.setZeroVelocity();
 
+	// GHOST AUTOMATION
+	// while(1){
+	// 	// console.log('hellos');
+	// }
+	// ghost.body.moveLeft(-40);
+	// delay(5);
+
+
+	// PLAYER MOOVEMENT
 	snakeHead.body.velocity.setTo(0, 0);
 	snakeHead.body.angularVelocity = 0;
 
@@ -141,7 +163,6 @@ function update() {
 	if (cursors.left.isDown) {
 		snakeHead.body.angularVelocity = -(angularSpeed);
 		moveSnakeForward();
-		// ghost.body.moveLeft(400);
 
 
 	} else if (cursors.right.isDown) {
