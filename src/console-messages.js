@@ -1,1 +1,0 @@
-console.log(" Hows the music? \n\n                          .\n                          |\ \n                         _j    .___,\n                        (_j    |---|\n                              _|   |\n                     .____.  (_j  _|\n                     |.--.| .    (_J\n                     |l__j|  .\n                     |+ oo| .\n                     l____j\n\n");
