@@ -1,0 +1,22 @@
+{
+  "name": "noob-game",
+  "version": "1.0.0",
+  "description": "come when its completed :)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fauwara/noob-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fauwara/noob-game/issues"
+  },
+  "homepage": "https://github.com/fauwara/noob-game#readme",
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
