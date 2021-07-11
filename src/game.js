@@ -80,5 +80,5 @@ function update() {
 }
 
 function render() {
-  game.debug.spriteInfo(snakeHead, 32, 32);
+  //game.debug.spriteInfo(snakeHead, 32, 32);
 }
