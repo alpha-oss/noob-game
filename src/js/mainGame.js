@@ -16,10 +16,7 @@ class mainGame extends Phaser.Scene {
 
     this.anims.create({
       key: "candy_snake",
-      frames: this.anims.generateFrameNumbers("candy", {
-        start: 0,
-        end: 1,
-      }),
+      frames: this.anims.generateFrameNumbers("candy"),
       frameRate: 5,
       repeat: -1,
     });
@@ -36,6 +33,4 @@ class mainGame extends Phaser.Scene {
     this.ghost.play("ghost_walk");
     this.candy.play("candy_snake");
   }
-
-  update() {}
 }
