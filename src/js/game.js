@@ -1,8 +1,7 @@
 var config = {
   width: 1200,
   height: 675,
-  scene: [scene1, scene2],
+  scene: [mainGame],
 };
-window.onload = function () {
-  var game = new Phaser.Game();
-};
+
+var game = new Phaser.Game(config);
