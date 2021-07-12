@@ -13,7 +13,7 @@ class bootGame extends Phaser.Scene {
     });
     this.load.spritesheet("candy", "src/assets/candy-sprite.png", {
       frameWidth: 16,
-      frameHeight: 24,
+      frameHeight: 16,
     });
   }
 
