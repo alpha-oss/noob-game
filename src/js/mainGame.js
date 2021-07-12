@@ -34,7 +34,7 @@ class mainGame extends Phaser.Scene {
     });
 
     this.ghost.play("ghost_walk");
-    this.candy.play("candy_sanke");
+    this.candy.play("candy_snake");
   }
 
   update() {}
