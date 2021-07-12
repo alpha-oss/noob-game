@@ -4,12 +4,25 @@ class mainGame extends Phaser.Scene {
   }
 
   create() {
-    //background
     this.bg = this.add.image(0, 0, "bg");
     this.bg.setOrigin(0, 0);
 
-    //ghost
+    this.candy = this.add.sprite(
+      config.width / 2 - 50,
+      config.height / 2,
+      "candy"
+    );
     this.ghost = this.add.sprite(200, 200, "ghost");
+
+    this.anims.create({
+      key: "candy_snake",
+      frames: this.anims.generateFrameNumbers("candy", {
+        start: 0,
+        end: 1,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
     this.anims.create({
       key: "ghost_walk",
       frames: this.anims.generateFrameNumbers("ghost", {
@@ -19,10 +32,9 @@ class mainGame extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.ghost.play("ghost_walk");
 
-    //candy-snake
-    this.candy;
+    this.ghost.play("ghost_walk");
+    this.candy.play("candy_sanke");
   }
 
   update() {}
