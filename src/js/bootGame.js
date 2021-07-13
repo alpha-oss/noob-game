@@ -1,3 +1,5 @@
+let button;
+
 class bootGame extends Phaser.Scene {
 	constructor() {
 		super("bootGame");

@@ -2,7 +2,6 @@ class mainGame extends Phaser.Scene {
 	constructor() {
 		super("mainGame");
 	}
-
 	create() {
 		// add images
 		this.bg = this.add.image(0, 0, "bg");
