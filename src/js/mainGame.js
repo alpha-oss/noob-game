@@ -36,5 +36,10 @@ class mainGame extends Phaser.Scene {
     // play animations
     this.ghost.play("ghost_walk");
     this.candy.play("candy_snake");
+
+    this.group = this.add.group();
+    for (let i = 0; i < 32; i++) {
+      this.group.create(i * 32, i * 2, "candy");
+    }
   }
 }
