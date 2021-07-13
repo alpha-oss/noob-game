@@ -1,35 +1,40 @@
 class mainGame extends Phaser.Scene {
-  constructor() {
-    super("mainGame");
-  }
+	constructor() {
+		super("mainGame");
+	}
 
-  create() {
-    this.bg = this.add.image(0, 0, "bg");
-    this.bg.setOrigin(0, 0);
+	create() {
+		// add images
+		this.bg = this.add.image(0, 0, "bg");
+		this.bg.setOrigin(0, 0);
 
-    this.candy = this.add.sprite(20, 20, "candy");
-    this.ghost = this.add.sprite(200, 200, "ghost");
+		this.candy = this.add.sprite(300, 300, "candy");
+		this.ghost = this.add.sprite(200, 200, "ghost");
 
-    this.anims.create({
-      key: "candy_snake",
-      frames: this.anims.generateFrameNumbers("candy", {
-        start: 0,
-        end: 1,
-      }),
-      frameRate: 5,
-      repeat: 0,
-    });
-    this.anims.create({
-      key: "ghost_walk",
-      frames: this.anims.generateFrameNumbers("ghost", {
-        start: 0,
-        end: 1,
-      }),
-      frameRate: 5,
-      repeat: -1,
-    });
+		// create animations
+		this.anims.create({
+			key: "candy_snake",
+			frames: this.anims.generateFrameNumbers("candy", {
+				start: 0,
+				end: 1,
+			}),
+			frameRate: 5,
+			repeat: -1,
+		});
 
-    this.ghost.play("ghost_walk");
-    this.candy.play("candy_snake");
-  }
+		// ghost walk animation
+		this.anims.create({
+			key: "ghost_walk",
+			frames: this.anims.generateFrameNumbers("ghost", {
+				start: 0,
+				end: 1,
+			}),
+			frameRate: 5,
+			repeat: -1,
+		});
+
+		// play animations
+		this.ghost.play("ghost_walk");
+		this.candy.play("candy_snake");
+	}
 }
