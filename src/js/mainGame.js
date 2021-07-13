@@ -8,33 +8,28 @@ class mainGame extends Phaser.Scene {
 		this.bg = this.add.image(0, 0, "bg");
 		this.bg.setOrigin(0, 0);
 
+		// sprites
 		this.candy = this.add.sprite(300, 300, "candy");
-		this.ghost = this.add.sprite(200, 200, "ghost");
+		// this.ghost = this.add.sprite(200, 200, "ghost");
+		
+		// ghosts
+		this.ghostGeng = this.physics.add.group();
 
-		// create animations
-		this.anims.create({
-			key: "candy_snake",
-			frames: this.anims.generateFrameNumbers("candy", {
-				start: 0,
-				end: 1,
-			}),
-			frameRate: 5,
-			repeat: -1,
-		});
-
-		// ghost walk animation
-		this.anims.create({
-			key: "ghost_walk",
-			frames: this.anims.generateFrameNumbers("ghost", {
-				start: 0,
-				end: 1,
-			}),
-			frameRate: 5,
-			repeat: -1,
-		});
+		var maxObjects = 5;
+		for (var i = 0; i < maxObjects; i++){
+			var ghost = this.physics.add.sprite(500,500,"ghost");
+			this.ghostGeng.add(ghost);
+			ghost.setRandomPosition(0,0,1200,675);
+			
+			ghost.play("ghost_walk");
+			ghost.setVelocity(100,100);
+			ghost.setCollideWorldBounds(true);
+			ghost.setBounce(1);
+		}
 
 		// play animations
-		this.ghost.play("ghost_walk");
 		this.candy.play("candy_snake");
+		// this.ghost.play("ghost_walk");
+		
 	}
 }
