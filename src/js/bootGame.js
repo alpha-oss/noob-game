@@ -8,6 +8,8 @@ class bootGame extends Phaser.Scene {
 	preload() {
 		//images
 		this.load.image("bg", "src/assets/bg.png");
+		this.load.image("home","src/assets/earth.png")
+		this.load.image("bullet","src/assets/bullet.png");
 		//sprites
 		this.load.spritesheet("ghost", "src/assets/ghost-sprite.png", { //ghost
 			frameWidth: 75,
@@ -42,6 +44,16 @@ class bootGame extends Phaser.Scene {
 			frameRate: 5,
 			repeat: -1,
 		});
+
+		this.anims.create({
+			key: 'bullet-move',
+			frames: this.anims.generateFrameNumbers("bullet",{
+				start: 0,
+				end: 1
+			}),
+			frameRate: 4,
+			repeat: -1
+		})
 
 		this.scene.start("mainGame");
 	}
