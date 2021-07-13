@@ -29,10 +29,6 @@ class mainGame extends Phaser.Scene {
     this.physics.add.collider(ghosts);
     ghosts.playAnimation("ghost_walk", [0, 1]);
 
-    // play animations
-    this.candy.play("candy_beam");
-    this.ghost.play("ghost_walk");
-
     // ghostShootTime = this.time.addEvent({ delay: 500, callback: ghostShoot, callbackScope: this, loop: true });
 
     // create cursor keys
