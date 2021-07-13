@@ -10,26 +10,59 @@ class mainGame extends Phaser.Scene {
 
 		// sprites
 		this.candy = this.add.sprite(300, 300, "candy");
-		// this.ghost = this.add.sprite(200, 200, "ghost");
+		this.ghost = this.physics.add.sprite(200, 200, "ghost");
 		
-		// ghosts
-		this.ghostGeng = this.physics.add.group();
+		var ghosts = this.physics.add.group({
+			key: 'ghost',
+			quantity: 5,
+			bounceX: 1,
+			bounceY: 1,
+			collideWorldBounds: true,
+			velocityX: 100,
+			velocityY: 100
+		});
+		
 
-		var maxObjects = 5;
-		for (var i = 0; i < maxObjects; i++){
-			var ghost = this.physics.add.sprite(500,500,"ghost");
-			this.ghostGeng.add(ghost);
-			ghost.setRandomPosition(0,0,1200,675);
-			
-			ghost.play("ghost_walk");
-			ghost.setVelocity(100,100);
-			ghost.setCollideWorldBounds(true);
-			ghost.setBounce(1);
-		}
+		Phaser.Actions.RandomRectangle(ghosts.getChildren(), this.physics.world.bounds);
+		this.physics.add.collider(ghosts);
+		ghosts.playAnimation("ghost_walk", [0,1])
 
 		// play animations
-		this.candy.play("candy_snake");
-		// this.ghost.play("ghost_walk");
+		this.candy.play("candy_beam");
+		this.ghost.play("ghost_walk");
+
+		// ghostShootTime = this.time.addEvent({ delay: 500, callback: ghostShoot, callbackScope: this, loop: true });
+
+		// create cursor keys
+		this.cursorKeys = this.input.keyboard.createCursorKeys();
 		
 	}
+
+	update() {
+		this.ghost.setVelocity(0);
+
+		this.ghostShoot();
+
+		this.moveGhost();
+	}
+
+	moveGhost(){
+		if(this.cursorKeys.left.isDown){
+			this.ghost.setVelocityX(-200);
+		}else if(this.cursorKeys.right.isDown){
+			this.ghost.setVelocityX(200);
+		}
+	}
+
+	ghostShoot() {
+		var candy = this.physics.add.sprite( this.ghost.x, this.ghost.y, "candy");
+		candy.play("candy_beam");
+		candy.body.velocity.x = 100;
+
+		if (candy.x > 200){
+			candy.destroy();
+		}
+	}
+
+
 }

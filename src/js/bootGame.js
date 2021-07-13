@@ -21,7 +21,7 @@ class bootGame extends Phaser.Scene {
 
 		// create animations
 		this.anims.create({
-			key: "candy_snake",
+			key: "candy_beam",
 			frames: this.anims.generateFrameNumbers("candy", {
 				start: 0,
 				end: 1,
