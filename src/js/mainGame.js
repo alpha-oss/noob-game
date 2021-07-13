@@ -7,7 +7,7 @@ class mainGame extends Phaser.Scene {
     this.bg = this.add.image(0, 0, "bg");
     this.bg.setOrigin(0, 0);
 
-    this.candy = this.add.sprite(20, 20, "candy");
+    this.candy = this.add.sprite(0.5, 0.5, "candy");
     this.ghost = this.add.sprite(200, 200, "ghost");
 
     this.anims.create({
@@ -17,7 +17,7 @@ class mainGame extends Phaser.Scene {
         end: 1,
       }),
       frameRate: 5,
-      repeat: 0,
+      repeat: -1,
     });
     this.anims.create({
       key: "ghost_walk",
