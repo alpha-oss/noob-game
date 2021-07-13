@@ -4,60 +4,87 @@ class mainGame extends Phaser.Scene {
   }
 
   create() {
+    console.log(this);
     // add images
     this.bg = this.add.image(0, 0, "bg");
     this.bg.setOrigin(0, 0);
 
-    // sprites
-    this.candy = this.add.sprite(300, 300, "candy");
-    this.ghost = this.physics.add.sprite(200, 200, "ghost");
-
-    var ghosts = this.physics.add.group({
+    this.ghosts = this.physics.add.group({
+      frameQuantity: 5,
       key: "ghost",
-      quantity: 5,
       bounceX: 1,
       bounceY: 1,
       collideWorldBounds: true,
       velocityX: 100,
       velocityY: 100,
+      // active: false,
+      // visible: false,
     });
 
     Phaser.Actions.RandomRectangle(
-      ghosts.getChildren(),
+      this.ghosts.getChildren(),
       this.physics.world.bounds
     );
-    this.physics.add.collider(ghosts);
-    ghosts.playAnimation("ghost_walk", [0, 1]);
+    this.physics.add.collider(this.ghosts);
+    this.ghosts.playAnimation("ghost_walk", [0, 1]);
 
-    // ghostShootTime = this.time.addEvent({ delay: 500, callback: ghostShoot, callbackScope: this, loop: true });
+    // play animations
+
+    // timed events
+    this.time.addEvent({
+      delay: 5000,
+      callback: this.ghostShoot,
+      callbackScope: this,
+      loop: true,
+    });
+    this.time.addEvent({
+      delay: 5000,
+      callback: this.ghostAppears,
+      callbackScope: this,
+      loop: true,
+    });
 
     // create cursor keys
     this.cursorKeys = this.input.keyboard.createCursorKeys();
   }
 
   update() {
-    this.ghost.setVelocity(0);
+    // this.candy.children.iterate(function (child) {
+    // 	// kill candy
+    // 	if(child.x > config.width-100){
+    // 		child.destroy();
+    // 	}
+    // });
 
-    this.ghostShoot();
-
-    this.moveGhost();
-  }
-
-  moveGhost() {
-    if (this.cursorKeys.left.isDown) {
-      this.ghost.setVelocityX(-200);
-    } else if (this.cursorKeys.right.isDown) {
-      this.ghost.setVelocityX(200);
-    }
+    this.ghosts.children.iterate(function (child) {
+      // flip ghosts
+      if (child.x < config.width / 2) {
+        child.flipX = true;
+      } else {
+        child.flipX = false;
+      }
+    });
   }
 
   ghostShoot() {
-    var candy = this.physics.add.sprite(this.ghost.x, this.ghost.y, "candy");
-    candy.play("candy_beam");
-    candy.body.velocity.x = 100;
+    this.ghosts.children.iterate(function (child) {
+      // Ghosts Shoot
+      var candy = child.scene.physics.add.sprite(child.x, child.y, "candy");
+      candy.play("candy_beam");
+      candy.body.velocity.x = config.width / 2 - candy.body.x;
+      candy.body.velocity.y = config.height / 2 - candy.body.y;
+    });
+  }
 
-    if (candy.x > 200) {
-      candy.destroy();
-    }
+  ghostAppears() {
+    // console.log('hai');
+    // var ghostsDetails = this.ghosts.getChildren();
+    // console.log(ghostsDetails);
+    // this.body.reset(x, y);
+    // this.ghosts.add(mainGame ,"ghost");
+    // this.ghosts.clear();
+    // Phaser.Actions.RandomRectangle(this.ghosts.getChildren(), this.physics.world.bounds);
+    // this.physics.add.collider(this.ghosts);
+    // this.ghosts.playAnimation("ghost_walk", [0,1]);
   }
 }
