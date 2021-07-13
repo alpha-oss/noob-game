@@ -14,6 +14,7 @@ class mainGame extends Phaser.Scene {
 		this.ghost = this.physics.add.sprite(200, 200, "ghost");
 		this.ghost.setCollideWorldBounds(true);
 		
+		// this.ghosts = this.physics.add.group();
 
 		this.ghosts = this.physics.add.group({
 			key: 'ghost',
