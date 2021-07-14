@@ -6,6 +6,7 @@ class bootGame extends Phaser.Scene {
   preload() {
     //images
     this.load.image("bg", "src/assets/bg.png");
+    this.load.image("pump", "src/assets/shit.png");
     //sprites
     this.load.spritesheet("ghost", "src/assets/ghost-sprite.png", {
       //ghost
@@ -20,6 +21,16 @@ class bootGame extends Phaser.Scene {
   }
 
   create() {
+    // create animations
+    this.anims.create({
+      key: "candy_beam",
+      frames: this.anims.generateFrameNumbers("candy", {
+        start: 0,
+        end: 1,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
     // ghost walk animation
     this.anims.create({
       key: "ghost_walk",

@@ -11,12 +11,8 @@ var config = {
     },
   },
 };
-var snake;
-var cursors;
-//Direction consts
-var UP = 0;
-var DOWN = 1;
-var LEFT = 2;
-var RIGHT = 3;
 
+var snakeHead; //head of snake sprite
+var distance;
+var target = new Phaser.Math.Vector2();
 var game = new Phaser.Game(config);

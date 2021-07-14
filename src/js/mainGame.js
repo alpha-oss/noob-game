@@ -9,6 +9,19 @@ class mainGame extends Phaser.Scene {
     this.bg = this.add.image(0, 0, "bg");
     this.bg.setOrigin(0, 0);
 
+    snakeHead = this.physics.add.image(100, 300, "pump");
+    this.input.on(
+      "pointerdown",
+      function (pointer) {
+        target.x = pointer.x;
+        target.y = pointer.y;
+
+        // Move at 200 px/s:
+        this.physics.moveToObject(snakeHead, target, 200);
+      },
+      this
+    );
+
     this.ghosts = this.physics.add.group({
       frameQuantity: 5,
       key: "ghost",
@@ -55,6 +68,18 @@ class mainGame extends Phaser.Scene {
     // 		child.destroy();
     // 	}
     // });
+    this.distance = Phaser.Math.Distance.Between(
+      snakeHead.x,
+      snakeHead.y,
+      target.x,
+      target.y
+    );
+
+    if (snakeHead.body.speed > 0) {
+      if (distance < 4) {
+        snakeHead.body.reset(target.x, target.y);
+      }
+    }
 
     this.ghosts.children.iterate(function (child) {
       // flip ghosts
