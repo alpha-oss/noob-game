@@ -1,15 +1,15 @@
 var config = {
-  type: Phaser.AUTO,
-  width: 1200,
-  height: 675,
-  scene: [bootGame, mainGame],
-  pixelArt: true,
-  physics: {
-    default: "arcade",
-    arcade: {
-      debug: false,
-    },
-  },
+	type: Phaser.AUTO,
+	width: 1200,
+	height: 675,
+	scene: [bootGame, mainMenu, mainGame],
+	pixelArt: true,
+	physics: {
+		default: "arcade",
+		arcade: {
+			debug: false,
+		},
+	},
 };
 
 var player; //player
