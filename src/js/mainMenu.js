@@ -17,7 +17,7 @@ class mainMenu extends Phaser.Scene {
 		playButton.setInteractive();
 		
 		playButton.on('pointerdown', () => {
-			console.log("bruhh");
+			this.scene.start("mainGame");
 		});
 	}
 }
