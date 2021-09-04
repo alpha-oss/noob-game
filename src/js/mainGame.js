@@ -10,17 +10,17 @@ class mainGame extends Phaser.Scene {
 		this.bg.setOrigin(0, 0);
 
 		player = this.physics.add.image(config.width/2, config.height/2, "player");
-		this.input.on(
-			"pointerdown",
-			function (pointer) {
-				target.x = pointer.x;
-				target.y = pointer.y;
+		// this.input.on(
+		// 	"pointerdown",
+		// 	function (pointer) {
+		// 		target.x = pointer.x;
+		// 		target.y = pointer.y;
 
-				// Move at 200 px/s:
-				this.physics.moveToObject(player, target, 200);
-			},
-			this
-		);
+		// 		// Move at 200 px/s:
+		// 		this.physics.moveToObject(player, target, 200);
+		// 	},
+		// 	this
+		// );
 
 		this.ghosts = this.physics.add.group({
 			frameQuantity: 1,
@@ -154,6 +154,7 @@ class mainGame extends Phaser.Scene {
 			child.scene.physics.moveToObject( candy, candyTarget, 300);
 			child.scene.physics.add.collider( player, candy, function() {
 				candy.destroy();
+				// child.scene.deathSound.play();
 				child.scene.health--;
 				child.scene.healthLabel.text = "HEALTH " + child.scene.health;
 			});

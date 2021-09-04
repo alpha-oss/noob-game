@@ -6,10 +6,10 @@ class bootGame extends Phaser.Scene {
 	preload() {
 		//images
 		this.load.image("bg", "src/assets/bg.png");
-		this.load.image("player", "src/assets/shit.png");
+		this.load.image("player", "src/assets/samurai.png");
 		//sprites
 		this.load.spritesheet("ghost", "src/assets/ghost-sprite.png", {
-			//ghost
+			//ghosts
 			frameWidth: 75,
 			frameHeight: 75,
 		});
@@ -18,9 +18,14 @@ class bootGame extends Phaser.Scene {
 			frameWidth: 22,
 			frameHeight: 22,
 		});
+
+		// audio
+		// this.load.audio("roblox-death-audio", "src/assets/roblox-death.mp3"); // "src/assets/roblox-death.ogg",
 	}
 
 	create() {
+		
+		this.add.text(20, 20, "Loading Game...");
 		// create animations
 		this.anims.create({
 			key: "candy_beam",
@@ -42,6 +47,8 @@ class bootGame extends Phaser.Scene {
 			repeat: -1,
 		});
 
-		this.scene.start("mainGame");
+		// this.deathSound = this.sound.add("roblox-death-audio");
+
+		this.scene.start("mainMenu");
 	}
 }
