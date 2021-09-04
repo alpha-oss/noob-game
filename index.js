@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+const PORT = 5000;
 
 app.use('/src', express.static(__dirname + '/src'));
 
@@ -13,6 +14,6 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(5000, () => {
-    console.log("sever is running.");
+app.listen(PORT, () => {
+    console.log(`sever is running on port http://localhost:${PORT}`);
 });
