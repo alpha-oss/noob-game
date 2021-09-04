@@ -44,32 +44,6 @@ class bootGame extends Phaser.Scene {
       repeat: -1,
     });
 
-<<<<<<< HEAD
-		// create animations
-		this.anims.create({
-			key: "candy_beam",
-			frames: this.anims.generateFrameNumbers("candy", {
-				start: 0,
-				end: 1,
-			}),
-			frameRate: 5,
-			repeat: -1,
-		});
-
-		// ghost walk animation
-		this.anims.create({
-			key: "ghost_walk",
-			frames: this.anims.generateFrameNumbers("ghost", {
-				start: 0,
-				end: 1,
-			}),
-			frameRate: 5,
-			repeat: -1,
-		});
-		this.scene.start("mainGame");
-	}
-=======
     this.scene.start("mainGame");
   }
->>>>>>> upstream/main
 }
