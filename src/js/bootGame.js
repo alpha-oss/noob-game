@@ -9,7 +9,7 @@ class bootGame extends Phaser.Scene {
 		this.load.image("player", "src/assets/samurai.png");
 		//sprites
 		this.load.spritesheet("ghost", "src/assets/ghost-sprite.png", {
-			//ghost
+			//ghosts
 			frameWidth: 75,
 			frameHeight: 75,
 		});
