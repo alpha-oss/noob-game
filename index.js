@@ -3,8 +3,13 @@ const express = require('express');
 const app = express();
 const PORT = 5000;
 
-app.use('/src', express.static(__dirname + '/src'));
+// route
+const lb = require('./backend/lb'); 
+app.use('/lb', lb);
 
+app.use('/game', express.static(__dirname + '/game'));
+
+// MAIN GAME
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html', (err) = {
         if(err) {

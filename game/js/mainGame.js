@@ -3,11 +3,18 @@ class mainGame extends Phaser.Scene {
 		super("mainGame");
 	}
 
+	init(data) {
+		this.user = data;
+	}
+
 	create() {
+
 		// console.log(this);
 		// add images
 		this.bg = this.add.image(0, 0, "bg");
 		this.bg.setOrigin(0, 0);
+		// this.add.text(200,200, this.user.name);
+		// this.add.text(200,300, this.user.score);
 
 		player = this.physics.add.image(config.width/2, config.height/2, "player");
 		// this.input.on(
@@ -41,7 +48,7 @@ class mainGame extends Phaser.Scene {
 
 		// timed events
 		this.time.addEvent({ delay: 9000, callback: this.ghostAppears, callbackScope: this, loop: true });
-		this.time.addEvent({ delay: 5000, callback: this.ghostShoot, callbackScope: this, loop: true });
+		this.time.addEvent({ delay: 1000, callback: this.ghostShoot, callbackScope: this, loop: true });
 		this.time.addEvent({ delay: 3000, callback: this.incScore, callbackScope: this, loop: true});
 
 		this.distance = Phaser.Math.Distance.Between(
@@ -63,10 +70,12 @@ class mainGame extends Phaser.Scene {
 		// colliders
 
 		this.health = 5;
-		this.score = 0;
+		this.user.score = 0;
+
 		// set text to screen 
-		this.scoreLabel = this.add.text(10, 10, `SCORE ${this.score}`, { font: '30px Courier', fill: '#00ff00' });
-		this.healthLabel = this.add.text(10, 40, `HEALTH ${this.health}`, { font: '30px Courier', fill: '#00ff00' });
+		this.userLabel = this.add.text(10, 10, `WE HAVE A NEWW CHALLLENGER: ${this.user.name}`, { font: '30px Courier', fill: '#00ff00' });
+		this.scoreLabel = this.add.text(10, 40, `SCORE ${this.user.score}`, { font: '30px Courier', fill: '#00ff00' });
+		this.healthLabel = this.add.text(10, 70, `HEALTH ${this.health}`, { font: '30px Courier', fill: '#00ff00' });
 
 		// this.physics.add.collider(player, this.ghosts, hurt);
 
@@ -75,10 +84,7 @@ class mainGame extends Phaser.Scene {
 	update() {
 		
 		if(!this.health){
-			if(alert(`NOOB XD, MY GRANDMOM COULD SCORE MORE THAN ${this.score}`)){}
-			else{
-				window.location.reload();
-			}
+			this.scene.start("endScene", this.user);
 		}
 
 		this.ghostFlip();
@@ -87,9 +93,8 @@ class mainGame extends Phaser.Scene {
 	}
 
 	incScore() {
-		this.score += 15;
-		this.scoreLabel.text = "SCORE " + this.score;
-
+		this.user.score += 15;
+		this.scoreLabel.text = "SCORE " + this.user.score;
 	}
 
 	playerMove(){
@@ -97,6 +102,7 @@ class mainGame extends Phaser.Scene {
 		player.setVelocityX(0);
 		player.setVelocityY(0);
 
+		// player movement
 		if(this.cursorKeys.left.isDown){
 			player.setVelocityX(-playerSpeed);
 		}else if(this.cursorKeys.right.isDown){
