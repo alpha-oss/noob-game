@@ -7,10 +7,11 @@ body{
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	background: rgb(27, 27, 27);
+	background: black;
 }
 
 canvas {
 	align-items: center;
 	margin: auto;
+	border: solid 5px #1e1f1e;
 }
