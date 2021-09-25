@@ -84,10 +84,6 @@ class mainGame extends Phaser.Scene {
 	update() {
 		
 		if(!this.health){
-			// if(alert(`NOOB XD, MY GRANDMOM COULD SCORE MORE THAN ${this.score}`)){}
-			// else{
-			// 	window.location.reload();
-			// }
 			this.scene.start("endScene", this.user);
 		}
 
