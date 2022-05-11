@@ -25,6 +25,7 @@ class endScene extends Phaser.Scene {
 				"Content-type": "application/json; charset=UTF-8"
 			}
 		})
+		
 		.then(res => res.json())
 		.then(json => console.log(json));
 		
@@ -33,7 +34,7 @@ class endScene extends Phaser.Scene {
 		playButton.setInteractive();
 		
 		playButton.on('pointerdown', () => {
-			this.scene.start("mainGame");
+			this.scene.start("stage1");
 		});
 	}
 }
